@@ -10,17 +10,22 @@
 \usepackage[sfdefault]{roboto}
 \usepackage[T1]{fontenc}
 
-\pagestyle{empty}
-
-\RequirePackage{everypage}
+\RequirePackage{fancyhdr}
 \RequirePackage{tikzpagenodes}
 
-\AddEverypageHook{
-  \begin{tikzpicture}[remember picture, overlay, black]     
-    \fill[lightgray] (current page marginpar area.east |- current page.north) rectangle (current page marginpar area.west |- current page.south);
-    \node[anchor = north] at (current page marginpar area.center |- current page header area.south) {\includegraphics[width = 15mm]{exlibris.png}};
-  \end{tikzpicture}
+\pagestyle{fancy}
+
+\fancyhf{}
+\fancyfoot[LE,RO]
+{
+    \begin{tikzpicture}[remember picture, overlay]     
+        \fill[lightgray] (current page marginpar area.east |- current page.north) rectangle (current page marginpar area.west |- current page.south);
+        \node[anchor = north] at (current page marginpar area.center |- current page header area.south) {\includegraphics[width = 15mm]{exlibris.png}};
+        \node[anchor = south] at (current page marginpar area.center |- current page footer area.north) {\bfseries\thepage};
+    \end{tikzpicture}
 }
+
+\renewcommand\headrulewidth\z@
 
 \def\songtitle#1{\gdef\@songtitle{#1}}
 \def\@songtitle{\@latex@error{No \noexpand\@songtitle given}\@ehc}
