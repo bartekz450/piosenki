@@ -16,8 +16,17 @@
 \def\SBauthor#1{\gdef\@SBauthor{#1}}
 \def\@SBauthor{\@latex@error{No \noexpand\@SBauthor given}\@ehc}
 
-\RequirePackage{changepage}
-\strictpagecheck
+\RequirePackage{ifoddpage}
+
+\newenvironment{flushinner}
+{
+    \checkoddpage
+    \def\@flushinner{\ifoddpage flushleft\else flushright\fi}
+    \expandafter\begin\expandafter{\@flushinner}
+}
+{
+    \expandafter\end\expandafter{\@flushinner}
+}
 
 \newenvironment{song}
 {
@@ -25,20 +34,15 @@
     \begin{center}
         \bfseries\large\@SBtitle
     \end{center}
-    \checkoddpage
-    \ifoddpage
-    \begin{flushleft}
+    \begin{flushinner}
         \itshape\@SBauthor
-    \end{flushleft}
-    \else
-    \begin{flushright}
-        \itshape\@SBauthor
-    \end{flushright}
-    \fi
+    \end{flushinner}
 }
 {
     
 }
+
+\RequirePackage{changepage}
 
 \newenvironment{chorus}
 {
