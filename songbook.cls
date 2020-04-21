@@ -51,6 +51,8 @@
     \begin{flushinner}
         \itshape\@songauthor
     \end{flushinner}
+    
+    \addcontentsline{toc}{section}{\@songtitle}
 }
 
 \RequirePackage{longtable}
