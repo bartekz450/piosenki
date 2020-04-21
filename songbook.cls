@@ -10,11 +10,11 @@
 \usepackage[sfdefault]{roboto}
 \usepackage[T1]{fontenc}
 
-\def\SBtitle#1{\gdef\@SBtitle{#1}}
-\def\@SBtitle{\@latex@error{No \noexpand\@SBtitle given}\@ehc}
+\def\songtitle#1{\gdef\@songtitle{#1}}
+\def\@songtitle{\@latex@error{No \noexpand\@songtitle given}\@ehc}
 
-\def\SBauthor#1{\gdef\@SBauthor{#1}}
-\def\@SBauthor{\@latex@error{No \noexpand\@SBauthor given}\@ehc}
+\def\songauthor#1{\gdef\@songauthor{#1}}
+\def\@songauthor{\@latex@error{No \noexpand\@songauthor given}\@ehc}
 
 \RequirePackage{ifoddpage}
 
@@ -28,29 +28,40 @@
     \expandafter\end\expandafter{\@flushinner}
 }
 
-\newenvironment{song}
+\newcommand\songmaketitle
 {
-    \setlength\parindent\z@
     \begin{center}
-        \bfseries\large\@SBtitle
+        \bfseries\large\@songtitle
     \end{center}
+    
     \begin{flushinner}
-        \itshape\@SBauthor
+        \itshape\@songauthor
     \end{flushinner}
 }
-{
-    
-}
 
-\RequirePackage{changepage}
+\RequirePackage{longtable}
+
+\setlength\LTright\z@
+\setlength\LTpre\lineskip
+
+\renewenvironment{verse}
+{
+    \setlength\LTleft\z@
+    
+    \begin{longtable}{@{\extracolsep{\fill}}lr@{}}
+}
+{
+    \end{longtable}
+}
 
 \newenvironment{chorus}
 {
-    \par
-    \textit{Ref.:}
-    \begin{adjustwidth}{2.5em}{\z@}
+    \setlength\LTleft{2.5em}
+    
+    \noindent\textit{Ref.:}
+    
+    \begin{longtable}{@{\extracolsep{\fill}}lr@{}}
 }
 {
-    \end{adjustwidth}
-    \par
+    \end{longtable}
 }
