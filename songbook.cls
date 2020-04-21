@@ -12,6 +12,16 @@
 
 \pagestyle{empty}
 
+\RequirePackage{everypage}
+\RequirePackage{tikzpagenodes}
+
+\AddEverypageHook{
+  \begin{tikzpicture}[remember picture, overlay, black]     
+    \fill[lightgray] (current page marginpar area.east |- current page.north) rectangle (current page marginpar area.west |- current page.south);
+    \node[anchor = north] at (current page marginpar area.center |- current page header area.south) {\includegraphics[width = 15mm]{exlibris.png}};
+  \end{tikzpicture}
+}
+
 \def\songtitle#1{\gdef\@songtitle{#1}}
 \def\@songtitle{\@latex@error{No \noexpand\@songtitle given}\@ehc}
 
