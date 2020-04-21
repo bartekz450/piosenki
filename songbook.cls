@@ -5,10 +5,12 @@
 \ProcessOptions\relax
 \LoadClass{book}
 
-\RequirePackage[pass]{geometry}
+\RequirePackage[top=10mm,bottom=10mm,inner=10mm,outer=25mm]{geometry}
 
 \usepackage[sfdefault]{roboto}
 \usepackage[T1]{fontenc}
+
+\pagestyle{empty}
 
 \def\songtitle#1{\gdef\@songtitle{#1}}
 \def\@songtitle{\@latex@error{No \noexpand\@songtitle given}\@ehc}
@@ -41,12 +43,11 @@
 
 \RequirePackage{longtable}
 
-\setlength\LTright\z@
-\setlength\LTpre\lineskip
-
 \renewenvironment{verse}
 {
     \setlength\LTleft\z@
+    \setlength\LTright\z@
+    \setlength\LTpre\lineskip
     
     \begin{longtable}{@{\extracolsep{\fill}}lr@{}}
 }
@@ -57,6 +58,8 @@
 \newenvironment{chorus}
 {
     \setlength\LTleft{2.5em}
+    \setlength\LTright\z@
+    \setlength\LTpre\lineskip
     
     \noindent\textit{Ref.:}
     
