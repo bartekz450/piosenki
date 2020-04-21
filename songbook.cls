@@ -18,12 +18,9 @@
 \def\songauthor#1{\gdef\@songauthor{#1}}
 \def\@songauthor{\@latex@error{No \noexpand\@songauthor given}\@ehc}
 
-\RequirePackage{ifoddpage}
-
 \newenvironment{flushinner}
 {
-    \checkoddpage
-    \def\@flushinner{\ifoddpage flushleft\else flushright\fi}
+    \def\@flushinner{\ifodd\c@page flushleft\else flushright\fi}
     \expandafter\begin\expandafter{\@flushinner}
 }
 {
