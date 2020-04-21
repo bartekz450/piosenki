@@ -10,25 +10,35 @@
 \usepackage[sfdefault]{roboto}
 \usepackage[T1]{fontenc}
 
-\def\SBtitle#1{\gdef\SB@title{#1}}
-\def\SB@title{\@latex@error{No \noexpand\SB@title given}\@ehc}
+\def\SBtitle#1{\gdef\@SBtitle{#1}}
+\def\@SBtitle{\@latex@error{No \noexpand\@SBtitle given}\@ehc}
 
-\def\SBlyrics#1{\gdef\SB@lyrics{#1}}
-\def\SB@lyrics{\@latex@error{No \noexpand\SB@lyrics given}\@ehc}
+\def\SBauthor#1{\gdef\@SBauthor{#1}}
+\def\@SBauthor{\@latex@error{No \noexpand\@SBauthor given}\@ehc}
 
-\def\SBmusic#1{\gdef\SB@music{#1}}
-\def\SB@music{\@latex@error{No \noexpand\SB@music given}\@ehc}
+\RequirePackage{changepage}
+\strictpagecheck
 
 \newenvironment{song}
 {
     \setlength\parindent\z@
-    \begin{center}\bfseries\large\SB@title\end{center}
+    \begin{center}
+        \bfseries\large\@SBtitle
+    \end{center}
+    \checkoddpage
+    \ifoddpage
+    \begin{flushleft}
+        \itshape\@SBauthor
+    \end{flushleft}
+    \else
+    \begin{flushright}
+        \itshape\@SBauthor
+    \end{flushright}
+    \fi
 }
 {
     
 }
-
-\RequirePackage{changepage}
 
 \newenvironment{chorus}
 {
